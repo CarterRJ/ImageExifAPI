@@ -44,6 +44,9 @@
                     method: 'get',
                     url: '@(Url.Action("Get", "api/image"))',
                     data: $('form#@GetImageByUrlFormId').serializeArray(),
+                    beforeSend: function () {
+                        $('#@GetImageByUrlOuputId').text("loading...");
+                    },
                     success: function (response) {
                         var imageModel = response;
 
@@ -68,8 +71,8 @@
                             `</td>
                         </tr >`;
                 table += '<tr><th>Url</th><td><a href="'+imageModel.Url+'">' + imageModel.Url + '</a></td></tr>';
-                table += '<tr><th>Height</th><td>' + imageModel.VerticalResolution+'</td></tr>';
-                table += '<tr><th>Width</th><td>' + imageModel.HorizontalResolution +'</td></tr>';
+                table += '<tr><th>Height</th><td>' + imageModel.Height+'</td></tr>';
+                table += '<tr><th>Width</th><td>' + imageModel.Width +'</td></tr>';
                 for (var key in imageModel.Metadata) {
                     table +=
                         `<tr>

@@ -15,8 +15,8 @@ namespace Audioagent_Image_API.Models
 
         public string Url { get; set; }
 
-        public string VerticalResolution { get => _image == null ? "" : _image.VerticalResolution.ToString(); }
-        public string HorizontalResolution { get => _image == null ? "" : _image.HorizontalResolution.ToString(); }
+        public string Height { get => _image == null ? "" : _image.Height.ToString() + "px"; }
+        public string Width { get => _image == null ? "" : _image.Width.ToString() + "px"; }
 
         public Dictionary<string, string> Metadata { get; } = new Dictionary<string, string>();
 
@@ -45,13 +45,11 @@ namespace Audioagent_Image_API.Models
             {
                 case ImagePropertyDataTypes.ByteArray:
                 case ImagePropertyDataTypes.UByteArray:
-                    data =
-                        BitConverter.ToString(properyItem.Value);
+                    data = BitConverter.ToString(properyItem.Value);
                     break;
 
                 case ImagePropertyDataTypes.String:
-                    data = Encoding.UTF8.GetString(
-                        properyItem.Value, 0, properyItem.Len - 1);
+                    data = Encoding.UTF8.GetString(properyItem.Value, 0, properyItem.Len - 1);
                     break;
 
                 case ImagePropertyDataTypes.UShortArray:
@@ -60,8 +58,7 @@ namespace Audioagent_Image_API.Models
                     num_items = properyItem.Len / item_size;
                     for (int i = 0; i < num_items; i++)
                     {
-                        ushort value = BitConverter.ToUInt16(
-                            properyItem.Value, i * item_size);
+                        ushort value = BitConverter.ToUInt16(properyItem.Value, i * item_size);
                         result += ", " + value.ToString();
                     }
                     if (result.Length > 0) result = result.Substring(2);
@@ -74,8 +71,7 @@ namespace Audioagent_Image_API.Models
                     num_items = properyItem.Len / item_size;
                     for (int i = 0; i < num_items; i++)
                     {
-                        uint value = BitConverter.ToUInt32(
-                            properyItem.Value, i * item_size);
+                        uint value = BitConverter.ToUInt32(properyItem.Value, i * item_size);
                         result += ", " + value.ToString();
                     }
                     if (result.Length > 0) result = result.Substring(2);
@@ -88,13 +84,9 @@ namespace Audioagent_Image_API.Models
                     num_items = properyItem.Len / item_size;
                     for (int i = 0; i < num_items; i++)
                     {
-                        uint numerator = BitConverter.ToUInt32(
-                            properyItem.Value, i * item_size);
-                        uint denominator = BitConverter.ToUInt32(
-                            properyItem.Value,
-                            i * item_size + item_size / 2);
-                        result += ", " + numerator.ToString() +
-                            "/" + denominator.ToString();
+                        uint numerator = BitConverter.ToUInt32(properyItem.Value, i * item_size);
+                        uint denominator = BitConverter.ToUInt32(properyItem.Value, i * item_size + item_size / 2);
+                        result += ", " + numerator.ToString() + "/" + denominator.ToString();
                     }
                     if (result.Length > 0) result = result.Substring(2);
                     data = "[" + result + "]";
@@ -106,8 +98,7 @@ namespace Audioagent_Image_API.Models
                     num_items = properyItem.Len / item_size;
                     for (int i = 0; i < num_items; i++)
                     {
-                        int value = BitConverter.ToInt32(
-                            properyItem.Value, i * item_size);
+                        int value = BitConverter.ToInt32(properyItem.Value, i * item_size);
                         result += ", " + value.ToString();
                     }
                     if (result.Length > 0) result = result.Substring(2);
@@ -120,13 +111,9 @@ namespace Audioagent_Image_API.Models
                     num_items = properyItem.Len / item_size;
                     for (int i = 0; i < num_items; i++)
                     {
-                        int numerator = BitConverter.ToInt32(
-                            properyItem.Value, i * item_size);
-                        int denominator = BitConverter.ToInt32(
-                            properyItem.Value,
-                            i * item_size + item_size / 2);
-                        result += ", " + numerator.ToString() +
-                            "/" + denominator.ToString();
+                        int numerator = BitConverter.ToInt32(properyItem.Value, i * item_size);
+                        int denominator = BitConverter.ToInt32(properyItem.Value, i * item_size + item_size / 2);
+                        result += ", " + numerator.ToString() + "/" + denominator.ToString();
                     }
                     if (result.Length > 0) result = result.Substring(2);
                     data = "[" + result + "]";
