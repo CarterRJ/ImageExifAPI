@@ -1,11 +1,8 @@
 ﻿using Audioagent_Image_API.Models;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace Audioagent_Image_API.Controllers

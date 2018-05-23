@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.IO;
-using System.Linq;
 using System.Text;
-using System.Web;
 
 namespace Audioagent_Image_API.Models
 {
@@ -134,6 +131,7 @@ namespace Audioagent_Image_API.Models
             LongFractionArray = 10,
         }
 
+        // Empty constructor for .Net bindings
         public ImageModel()
         {
         }
@@ -143,13 +141,13 @@ namespace Audioagent_Image_API.Models
             Metadata = ProcessPropertyItems();
         }
 
-
         #region ExifConstants
         /*
          * Spesiel/Library is licensed under the MIT License
          * https://raw.githubusercontent.com/Spesiel/Library/967f62335cba4fe7bc9393e6d88893635fcaa74a/LibraryReference/Constants.cs
          * 
          */
+         // Would rather have this ExifData as an enum but... time.
         public static Dictionary<int, string> ExifData => new Dictionary<int, string>()
                 {
                     // GPS values
