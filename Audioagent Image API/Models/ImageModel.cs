@@ -12,9 +12,11 @@ namespace Audioagent_Image_API.Models
     public class ImageModel
     {
         private Image _image;
-        private Stream _fileStream;
 
         public string Url { get; set; }
+
+        public string VerticalResolution { get => _image == null ? "" : _image.VerticalResolution.ToString(); }
+        public string HorizontalResolution { get => _image == null ? "" : _image.HorizontalResolution.ToString(); }
 
         public Dictionary<string, string> Metadata { get; } = new Dictionary<string, string>();
 
