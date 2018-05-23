@@ -12,16 +12,16 @@ namespace Audioagent_Image_API.Controllers
 {
     public class ImageController : ApiController
     {
-        // GET api/values
+        // GET api/image?url
         public ImageModel Get(string url)
         {
-            Image img = DownloadData(url);
+            Image img = DownloadImage(url);
             var imageModel = new ImageModel(img);
             imageModel.Url = url;
             return imageModel;
         }
 
-        private Image DownloadData(string url)
+        private Image DownloadImage(string url)
         {
             Image img = null;
             try
@@ -40,11 +40,6 @@ namespace Audioagent_Image_API.Controllers
             }
 
             return img;
-        }
-
-        // POST api/values
-        public void Post([FromBody]string value)
-        {
         }
     }
 }
