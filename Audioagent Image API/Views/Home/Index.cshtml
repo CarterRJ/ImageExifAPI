@@ -39,14 +39,14 @@
                 $.ajax({
                     dataType: "json",
                     method: 'get',
-                    url: 'http://localhost:63819/api/image',
+                    url: '@(Url.Action("Get", "api/image"))',
                     data: $('form#@GetImageByUrlFormId').serializeArray(),
                     success: function (response) {
                         var imageModel = response;
-                        $('#@GetImageByUrlOuputId').html(response);
+                        $('#@GetImageByUrlOuputId').text(JSON.stringify(imageModel));
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
-                        $('#@GetImageByUrlOuputId').html(jqXHR.responseText);
+                        $('#@GetImageByUrlOuputId').text(jqXHR.responseText);
                     }
                 });
             });
