@@ -31,10 +31,8 @@ namespace Audioagent_Image_API.Controllers
                 WebResponse response = webRequest.GetResponse();
                 Stream stream = response.GetResponseStream();
                 img = Image.FromStream(stream);
-                stream.Seek(0, SeekOrigin.Begin);
-                
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
             }

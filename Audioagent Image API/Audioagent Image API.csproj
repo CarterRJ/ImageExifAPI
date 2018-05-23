@@ -219,13 +219,12 @@
     </Content>
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
     <Content Include="Content\Site.css" />
-    <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\DisplayTemplates\ImageModel.cshtml" />
-    <Content Include="Views\Home\_Image.cshtml" />
+    <Content Include="Scripts\Views\Web.config" />
+    <Content Include="Scripts\Views\_ViewStart.cshtml" />
+    <Content Include="Scripts\Views\Home\Index.cshtml" />
+    <Content Include="Scripts\Views\Shared\Error.cshtml" />
+    <Content Include="Scripts\Views\Shared\_Layout.cshtml" />
+    <Content Include="Scripts\Views\Home\_Image.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

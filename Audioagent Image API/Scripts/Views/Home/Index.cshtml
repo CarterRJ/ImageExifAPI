@@ -1,0 +1,111 @@
+﻿<div class="jumbotron">
+    <h1>Image API</h1>
+    <p class="lead">
+        This specification is for a small project which will contain an API to retrieve image information from a file, and a web client to display the response.</p>
+    </div>
+<div class="row">
+    <div class="col-md-12">
+        <span>e.g. https://avatars2.githubusercontent.com/u/5602789?s=460&v=4 </span>
+        @{
+            var GetImageByUrlFormId = "api__image__getByUrl--form";
+            var GetImageByUrlButtonId = "api__image__getByUrl--submit";
+            var GetImageByUrlRazorButtonId = "api__image__getByUrl--razor-submit";
+            var GetImageByUrlOuputId = "api__image__getByUrl--output";
+        }
+        <form class="form" id="@GetImageByUrlFormId">
+            <div class="input-group">
+                <input name="url" placeholder="{URL}" type="text" value="https://scontent-lht6-1.cdninstagram.com/vp/136dffac2b8efa1a81c52c5d60ad1eab/5B9FC23C/t51.2885-15/e35/28433320_2032766490334434_6079172250643202048_n.jpg" />
+                <button id="@GetImageByUrlButtonId" type="button">Javascript UI Submit</button>
+                <button id="@GetImageByUrlRazorButtonId" type="button">Razor UI Submit</button>
+            </div>
+        </form>
+
+        <br />
+     
+        <div id="@GetImageByUrlOuputId" class="container">
+
+        </div>
+    </div>
+</div>
+
+@section scripts{
+<script>
+        $(document).ready(function () {
+            $('form#@GetImageByUrlFormId').keypress(function (e) {
+                if (e.keyCode == 13) {
+                    $('#@GetImageByUrlButtonId').click();
+                    e.preventDefault();
+                    return false;
+                }
+
+            });
+
+            $('#@GetImageByUrlRazorButtonId').click(function () {
+                $.ajax({
+                    method: 'get',
+                    url: '@(Url.Action("Image", "home"))',
+                    data: $('form#@GetImageByUrlFormId').serializeArray(),
+                    beforeSend: function () {
+                        $('#@GetImageByUrlOuputId').text("loading...");
+                    },
+                    success: function (response) {
+                      $('#@GetImageByUrlOuputId').fadeOut(function () {
+                            $('#@GetImageByUrlOuputId').empty();
+                            $('#@GetImageByUrlOuputId').html(response);
+                            $('#@GetImageByUrlOuputId').fadeIn();
+                        });
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        $('#@GetImageByUrlOuputId').text(jqXHR.responseText);
+                    }
+                });
+            });
+
+            $('#@GetImageByUrlButtonId').click(function () {
+                $.ajax({
+                    dataType: "json",
+                    method: 'get',
+                    url: '@(Url.Action("Get", "api/image"))',
+                    data: $('form#@GetImageByUrlFormId').serializeArray(),
+                    beforeSend: function () {
+                        $('#@GetImageByUrlOuputId').text("loading...");
+                    },
+                    success: function (response) {
+                        var imageModel = response;
+
+                        $('#@GetImageByUrlOuputId').fadeOut(function () {
+                            $('#@GetImageByUrlOuputId').empty();
+                            DisplayResponse(imageModel);
+                            $('#@GetImageByUrlOuputId').fadeIn();
+                        });
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        $('#@GetImageByUrlOuputId').text(jqXHR.responseText);
+                    }
+                });
+            });
+
+            function DisplayResponse(imageModel) {
+                var image = '<img class="mod-image__image" src="' + imageModel.Url + '"/>';
+                var table = '<table class="table">';
+                table += `<tr>
+                            <td  colspan="2" class="mod-image__image-container">`
+                                + image +
+                            `</td>
+                        </tr >`;
+                table += '<tr><th>Url</th><td><a class="mod-image__url" href="'+imageModel.Url+'">' + imageModel.Url + '</a></td></tr>';
+                table += '<tr><th>Height</th><td>' + imageModel.Height+'</td></tr>';
+                table += '<tr><th>Width</th><td>' + imageModel.Width +'</td></tr>';
+                for (var key in imageModel.Metadata) {
+                    table +=
+                        `<tr>
+                            <th>`+key+`</th>
+                            <td>`+ imageModel.Metadata[key] +`</td>
+                        </tr>`
+                }
+                table += '</table>';
+                $('#@GetImageByUrlOuputId').html(table);
+            }
+        });
+</script>
+}
