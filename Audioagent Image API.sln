@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2018
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Audioagent Image API", "Audioagent Image API\Audioagent Image API.csproj", "{328C9F8F-7AC9-41F3-9AC9-5921AC54DDED}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{328C9F8F-7AC9-41F3-9AC9-5921AC54DDED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{328C9F8F-7AC9-41F3-9AC9-5921AC54DDED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{328C9F8F-7AC9-41F3-9AC9-5921AC54DDED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{328C9F8F-7AC9-41F3-9AC9-5921AC54DDED}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {178B2028-39A4-4D1E-8D90-EBC107D9213D}
+	EndGlobalSection
+EndGlobal
