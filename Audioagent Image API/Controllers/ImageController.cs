@@ -21,18 +21,20 @@ namespace Audioagent_Image_API.Controllers
         private Image DownloadImage(string url)
         {
             Image img = null;
-            try
-            {
+            //try
+            //{
                 WebRequest webRequest = WebRequest.Create(url);
                 webRequest.Timeout = 10 * 1000;
                 WebResponse response = webRequest.GetResponse();
                 Stream stream = response.GetResponseStream();
                 img = Image.FromStream(stream);
-            }
-            catch (Exception e)
-            {
+            //}
+            // Either catch exceptions, fail silently and send empty ImageModel 
+            // Or don't catch and send error code.
+            //catch (Exception e)
+            //{
 
-            }
+            //}
 
             return img;
         }

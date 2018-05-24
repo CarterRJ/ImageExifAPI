@@ -11,17 +11,17 @@
             var GetImageByUrlButtonId = "api__image__getByUrl--submit";
             var GetImageByUrlRazorButtonId = "api__image__getByUrl--razor-submit";
             var GetImageByUrlOuputId = "api__image__getByUrl--output";
+            var ValidationSummaryId = "validation-summary";
         }
         <form class="form" id="@GetImageByUrlFormId">
             <div class="input-group">
                 <input name="url" placeholder="{URL}" type="text" value="https://scontent-lht6-1.cdninstagram.com/vp/136dffac2b8efa1a81c52c5d60ad1eab/5B9FC23C/t51.2885-15/e35/28433320_2032766490334434_6079172250643202048_n.jpg" />
                 <button id="@GetImageByUrlButtonId" type="button">Javascript UI Submit</button>
-                <button id="@GetImageByUrlRazorButtonId" type="button">Razor UI Submit</button>
             </div>
         </form>
 
         <br />
-     
+     <div id="@ValidationSummaryId" class="alert alert-danger" style="display:none;"></div>
         <div id="@GetImageByUrlOuputId" class="container">
 
         </div>
@@ -37,28 +37,6 @@
                     e.preventDefault();
                     return false;
                 }
-
-            });
-
-            $('#@GetImageByUrlRazorButtonId').click(function () {
-                $.ajax({
-                    method: 'get',
-                    url: '@(Url.Action("Image", "home"))',
-                    data: $('form#@GetImageByUrlFormId').serializeArray(),
-                    beforeSend: function () {
-                        $('#@GetImageByUrlOuputId').text("loading...");
-                    },
-                    success: function (response) {
-                      $('#@GetImageByUrlOuputId').fadeOut(function () {
-                            $('#@GetImageByUrlOuputId').empty();
-                            $('#@GetImageByUrlOuputId').html(response);
-                            $('#@GetImageByUrlOuputId').fadeIn();
-                        });
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        $('#@GetImageByUrlOuputId').text(jqXHR.responseText);
-                    }
-                });
             });
 
             $('#@GetImageByUrlButtonId').click(function () {
@@ -67,12 +45,11 @@
                     method: 'get',
                     url: '@(Url.Action("Get", "api/image"))',
                     data: $('form#@GetImageByUrlFormId').serializeArray(),
-                    beforeSend: function () {
+                    beforeSend: function (xhr) {
+                        clearValidation();
                         $('#@GetImageByUrlOuputId').text("loading...");
                     },
-                    success: function (response) {
-                        var imageModel = response;
-
+                    success: function (imageModel) {
                         $('#@GetImageByUrlOuputId').fadeOut(function () {
                             $('#@GetImageByUrlOuputId').empty();
                             DisplayResponse(imageModel);
@@ -80,6 +57,7 @@
                         });
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
+                        displayValidationMessage("Please enter a valid url");
                         $('#@GetImageByUrlOuputId').text(jqXHR.responseText);
                     }
                 });
@@ -106,6 +84,14 @@
                 table += '</table>';
                 $('#@GetImageByUrlOuputId').html(table);
             }
-        });
+    });
+
+    function displayValidationMessage(msg) {
+        $('#@ValidationSummaryId').text(msg).show();
+    }
+
+    function clearValidation() {
+        $('#@ValidationSummaryId').empty();
+    }
 </script>
 }
