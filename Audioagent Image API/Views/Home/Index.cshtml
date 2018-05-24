@@ -30,7 +30,8 @@
 
 @section scripts{
 <script>
-        $(document).ready(function () {
+    $(document).ready(function () {
+            // Prevent default form submit when pressing enter
             $('form#@GetImageByUrlFormId').keypress(function (e) {
                 if (e.keyCode == 13) {
                     $('#@GetImageByUrlButtonId').click();
@@ -91,7 +92,7 @@
     }
 
     function clearValidation() {
-        $('#@ValidationSummaryId').empty();
+        $('#@ValidationSummaryId').empty().hide();
     }
 </script>
 }
