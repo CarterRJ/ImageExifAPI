@@ -4,7 +4,7 @@
         This specification is for a small project which will contain an API to retrieve image information from a file, and a web client to display the response.</p>
     </div>
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-12">
         <span>e.g. https://avatars2.githubusercontent.com/u/5602789?s=460&v=4 </span>
         @{
             var GetImageByUrlFormId = "api__image__getByUrl--form";
@@ -86,14 +86,14 @@
             });
 
             function DisplayResponse(imageModel) {
-                var image = '<img style="max-width: 100%; max-height: 50vh;" src="' + imageModel.Url + '"/>';
+                var image = '<img class="mod-image__image" src="' + imageModel.Url + '"/>';
                 var table = '<table class="table">';
                 table += `<tr>
-                            <td  colspan="2" style="text-align: center;">`
+                            <td  colspan="2" class="mod-image__image-container">`
                                 + image +
                             `</td>
                         </tr >`;
-                table += '<tr><th>Url</th><td><a href="'+imageModel.Url+'">' + imageModel.Url + '</a></td></tr>';
+                table += '<tr><th>Url</th><td><a class="mod-image__url" href="'+imageModel.Url+'">' + imageModel.Url + '</a></td></tr>';
                 table += '<tr><th>Height</th><td>' + imageModel.Height+'</td></tr>';
                 table += '<tr><th>Width</th><td>' + imageModel.Width +'</td></tr>';
                 for (var key in imageModel.Metadata) {
