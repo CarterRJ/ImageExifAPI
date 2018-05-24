@@ -1,5 +1,4 @@
 ﻿@model Audioagent_Image_API.Models.ImageModel
-
 <table class="table">
     <tbody>
         <tr>
@@ -8,8 +7,6 @@
             </td>
         </tr>
         <tr><th>Url</th><td><a class="mod-image__url" href="@Model.Url">@Model.Url</a></td></tr>
-        <tr><th>Height</th><td>@Model.Height</td></tr>
-        <tr><th>Width</th><td>@Model.Width</td></tr>
         @foreach (var item in Model.Metadata)
         {
             <tr>
